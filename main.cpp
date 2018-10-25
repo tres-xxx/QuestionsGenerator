@@ -13,6 +13,34 @@ int random_number(int number){
     return rand() % number; //sets a random number
 }
 
+void printall(vector<pair<string,string> > qA){
+    for(int i = 0; i < qA.size(); i++){
+        cout << "Pregunta:" << endl;
+        cout << get<0>(qA[i]) << endl;
+        cout << "Respuesta:" << endl; 
+        cout << get<1>(qA[i]) << endl;
+        cout << "=================" << endl;
+    }
+}
+
+void optionsmenu(int o, vector<pair<string,string> >qA){
+    switch(o){
+        case 2: printall(qA);break;
+        default: cout << "Error escogiendo opción de menu." << endl;
+    }
+}
+
+int menu(){
+    cout << "------------------" << endl;
+    cout << "Menu:" << endl;
+    cout << "1. Ingreso a juego de preguntas aleatorias." << endl;
+    cout << "2. Impresión de todas las preguntas y sus respuestas." << endl;
+    cout << "Ingrese opción deseada: ";
+    int o;
+    cin >> o;
+    return o;
+}
+
 int main(int argc, char * argv[]){
     
     ifstream fe (argv[1]);//it reads the line argv[1] which especifies the name of the file to read
@@ -39,6 +67,13 @@ int main(int argc, char * argv[]){
     cout << "-----------------------------" << endl;
     cout << "Para salir oprimir 'q' y luego enter" << endl;
     cout << "-----------------------------" << endl;
+    
+    int tmn;
+    do{
+        tmn = menu();
+        optionsmenu(tmn, queAns);
+
+    }while(tmn != 1);
 
     string answ; //this string would be used to get any answer from the user
     while(answ[0] != 'q'){ //the program stops when the user has typed 'q'
